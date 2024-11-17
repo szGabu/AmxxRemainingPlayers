@@ -35,7 +35,7 @@ jobs:
   
       - name: Copy files to Scripting Directory
         run: |
-          cp -R scripting/* addons/amxmodx/scripting/
+          cp -R scripting/* amxmodx/scripting/
   
       - name: Verify Setup
         run: |
