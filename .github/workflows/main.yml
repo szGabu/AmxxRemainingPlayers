@@ -13,9 +13,8 @@ jobs:
 
       - name: Download and Extract AMX Mod X Base
         run: |
-          mkdir amxmodx
           wget https://www.amxmodx.org/amxxdrop/1.9/amxmodx-1.9.0-git5294-base-linux.tar.gz -O base.tar.gz
-          tar -xzf base.tar.gz -C amxmodx --strip-components=1
+          tar -xzf base.tar.gz -C . --strip-components=1
           rm base.tar.gz
   
       - name: Download and Extract Additional Modules
@@ -30,7 +29,7 @@ jobs:
           )
           for MODULE in "${MODULES[@]}"; do
             wget "https://www.amxmodx.org/amxxdrop/1.9/amxmodx-1.9.0-git5294-${MODULE}-linux.tar.gz" -O "${MODULE}.tar.gz"
-            tar -xzf "${MODULE}.tar.gz" -C amxmodx --strip-components=1
+            tar -xzf "${MODULE}.tar.gz" -C . --strip-components=1
             rm "${MODULE}.tar.gz"
           done
   
