@@ -32,7 +32,11 @@ jobs:
             tar -xzf "${MODULE}.tar.gz" -C . --strip-components=1
             rm "${MODULE}.tar.gz"
           done
-  
+
+      - name: Clean existing .sma files (we dont need them)
+        run: |
+          rm amxmodx/scripting/*.sma
+          
       - name: Copy files to Scripting Directory
         run: |
           cp -R scripting/* amxmodx/scripting/
@@ -41,3 +45,14 @@ jobs:
         run: |
           echo "Contents of amxmodx directory:"
           tree amxmodx/scripting
+
+      - name: Compile Repository Plugins
+        run: |
+          cd amxmodx/scripting
+          ./compile.sh
+
+      - name: Upload Compiled Scripts as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.repository }}-compiled
+          path: amxmodx/scripting/compiled
