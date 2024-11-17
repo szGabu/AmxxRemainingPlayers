@@ -80,6 +80,11 @@ jobs:
           name: ${{github.event.repository.name}}-compiled
           path: .
 
+      - name: Contents
+        run: |
+          cd ${{github.event.repository.name}}
+          zip -r ../${{github.event.repository.name}}.zip ./
+
       - name: Get latest tag
         id: tag
         run: |
@@ -89,7 +94,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ env.TAG }}
-          files: ./${{github.event.repository.name}}-compiled.zip
+          files: ./${{github.event.repository.name}}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
