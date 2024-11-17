@@ -51,6 +51,11 @@ jobs:
           cd amxmodx/scripting
           ./compile.sh
 
+      - name: Verify compiled conents
+        run: |
+          echo "Contents of compiled directory:"
+          tree amxmodx/scripting/compiled
+
       - name: Compile Repository Plugins
         run: |
           cd ../..
