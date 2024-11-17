@@ -40,4 +40,4 @@ jobs:
       - name: Verify Setup
         run: |
           echo "Contents of amxmodx directory:"
-          tree amxmodx
+          tree amxmodx/scripting
