@@ -51,7 +51,7 @@ jobs:
           cd amxmodx/scripting
           ./compile.sh
 
-      - name: Verify compiled conents
+      - name: Verify compiled contents
         run: |
           echo "Contents of compiled directory:"
           tree amxmodx/scripting/compiled
@@ -80,7 +80,12 @@ jobs:
           name: ${{github.event.repository.name}}-compiled
           path: .
 
-      - name: Contents
+      - name: Verify downloaded artifact  contents
+        run: |
+          echo "Contents of directory:"
+          tree .
+
+      - name: ZIP Contents
         run: |
           cd ${{github.event.repository.name}}
           zip -r ../${{github.event.repository.name}}.zip ./
