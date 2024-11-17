@@ -1,0 +1,45 @@
+name: Manual Build
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Download and Extract AMX Mod X Base
+        run: |
+          mkdir amxmodx
+          wget https://www.amxmodx.org/amxxdrop/1.9/amxmodx-1.9.0-git5294-base-linux.tar.gz -O base.tar.gz
+          tar -xzf base.tar.gz -C amxmodx --strip-components=1
+          rm base.tar.gz
+  
+      - name: Download and Extract Additional Modules
+        run: |
+          MODULES=(
+            cstrike
+            tfc
+            dod
+            ns
+            ts
+            esf
+          )
+          for MODULE in "${MODULES[@]}"; do
+            wget "https://www.amxmodx.org/amxxdrop/1.9/amxmodx-1.9.0-git5294-${MODULE}-linux.tar.gz" -O "${MODULE}.tar.gz"
+            tar -xzf "${MODULE}.tar.gz" -C amxmodx --strip-components=1
+            rm "${MODULE}.tar.gz"
+          done
+  
+      - name: Copy files to Scripting Directory
+        run: |
+          mkdir -p amxmodx/addons/amxmodx/scripting
+          cp -R scripting/* amxmodx/addons/amxmodx/scripting/
+  
+      - name: Verify Setup
+        run: |
+          echo "Contents of amxmodx directory:"
+          tree amxmodx
