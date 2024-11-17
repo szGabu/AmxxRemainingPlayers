@@ -51,8 +51,15 @@ jobs:
           cd amxmodx/scripting
           ./compile.sh
 
+      - name: Compile Repository Plugins
+        run: |
+          cd ../..
+          mkdir plugins
+          cp amxmodx/scripting/compiled/*.amxx plugins
+          rm -rf amxmodx
+
       - name: Upload Compiled Scripts as Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{github.event.repository.name}}-compiled
-          path: amxmodx/scripting/compiled
+          path: .
