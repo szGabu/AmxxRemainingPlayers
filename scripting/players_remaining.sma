@@ -53,6 +53,9 @@ public plugin_init()
 	g_cvarHoldTime = create_cvar("amx_pr_time_hold", "0.6", FCVAR_NONE, "Determines how long should the hint message should last", true, 0.0);
 	g_cvarFadeInTime = create_cvar("amx_pr_time_fadein", "0.7", FCVAR_NONE, "Determines how long should the message take to fade in", true, 0.0);
 	g_cvarFadeOutTime = create_cvar("amx_pr_time_fadeout", "0.7", FCVAR_NONE, "Determines how long should the message take to fade out", true, 0.0);
+
+	register_cvar("amx_pr_version", PLUGIN_VERSION, FCVAR_SERVER);
+
 	hook_cvar_change(g_cvarEnabled, "CvarChanged");
 	hook_cvar_change(g_cvarColorRed, "CvarChanged");
 	hook_cvar_change(g_cvarColorGreen, "CvarChanged");
